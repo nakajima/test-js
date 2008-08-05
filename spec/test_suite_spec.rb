@@ -21,4 +21,13 @@ describe "testJS.testSuite" do
     @ts.failed.length.should == 0
     @ts.errored.length.should == 0
   end
+  
+  describe "run()" do
+    it "should run tests" do
+      @ts.run
+      [:passed, :failed, :errored].each do |status|
+        @ts.send(status).length.should == 1
+      end      
+    end
+  end
 end
