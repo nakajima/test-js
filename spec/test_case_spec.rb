@@ -13,7 +13,7 @@ describe "testJS.testCase" do
   end
   
   describe "statuses" do
-    it "should return if passed" do
+    it "should know if passed" do
       tc = @runtime.evaluate("new testJS.testCase('test', function() { });")
       tc.__passed = true
       tc.passed.should be_true
@@ -21,7 +21,7 @@ describe "testJS.testCase" do
       tc.errored.should be_false
     end
     
-    it "should return if failed" do
+    it "should know if failed" do
       tc = @runtime.evaluate("new testJS.testCase('test', function() { });")
       tc.__passed = false
       tc.passed.should be_false
@@ -29,7 +29,7 @@ describe "testJS.testCase" do
       tc.errored.should be_false
     end
     
-    it "should return if errored" do
+    it "should know if errored" do
       tc = @runtime.evaluate("new testJS.testCase('test', function() { });")
       tc.errorMessage = 'Whoops!'
       tc.passed.should be_false
