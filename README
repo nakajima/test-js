@@ -1,6 +1,6 @@
 = Test-JS =
 
-For testing JavaScript.
+For writing JavaScript tests that run in Ruby.
 
 Uses Johnson.
 
