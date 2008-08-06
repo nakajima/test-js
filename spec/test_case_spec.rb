@@ -79,17 +79,17 @@ describe "testJS.testCase" do
     
     describe "printing results" do
       it "should print passing result" do
-        TestJS.should_receive(:log).with('.'.green)
+        $stdout.should_receive(:print).with('.'.green)
         @passing.run
       end
 
       it "should print failing result" do
-        TestJS.should_receive(:log).with('F'.red)
+        $stdout.should_receive(:print).with('F'.red)
         @failing.run
       end
 
       it "should print errored result" do
-        TestJS.should_receive(:log).with('E'.yellow)
+        $stdout.should_receive(:print).with('E'.yellow)
         @errored.run
       end
     end
