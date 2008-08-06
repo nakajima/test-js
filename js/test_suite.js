@@ -32,8 +32,7 @@ Object.extend(testJS.testSuite.prototype, {
   
   runMeta: function(name, test) {
     if (typeof(this.meta[name]) != undefined) {
-      var handler = this.meta[name].bind(test);
-      handler.call();
+      this.meta[name].apply(test);
     }
   },
   
