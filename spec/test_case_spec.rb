@@ -54,8 +54,8 @@ describe "testJS.testCase" do
   
   describe "run()" do
     before(:each) do
-      @passed = @runtime.evaluate("new testJS.testCase('test', function() { this.assert(true); });")
-      @failed = @runtime.evaluate("new testJS.testCase('test', function() { this.assert(false); });")
+      @passing = @runtime.evaluate("new testJS.testCase('test', function() { this.assert(true); });")
+      @failing = @runtime.evaluate("new testJS.testCase('test', function() { this.assert(false); });")
       @errored = @runtime.evaluate("new testJS.testCase('test', function() { throw('whoops'); });")
     end
     
@@ -64,13 +64,13 @@ describe "testJS.testCase" do
     end
     
     it "should pass when asserting true" do
-      @passed.run
-      @passed.passed.should be_true
+      @passing.run
+      @passing.passed.should be_true
     end
 
     it "should fail when asserting true" do
-      @failed.run
-      @failed.passed.should be_false
+      @failing.run
+      @failing.passed.should be_false
     end
     
     it "should handle errors" do
@@ -80,20 +80,17 @@ describe "testJS.testCase" do
     describe "printing results" do
       it "should print passing result" do
         TestJS.should_receive(:log).with('.'.green)
-        @runtime.evaluate("tc = new testJS.testCase('test', function() { this.assert(true); });")
-        @runtime.evaluate("tc.run()")
+        @passing.run
       end
 
       it "should print failing result" do
         TestJS.should_receive(:log).with('F'.red)
-        @runtime.evaluate("tc = new testJS.testCase('test', function() { this.assert(false); });")
-        @runtime.evaluate("tc.run()")
+        @failing.run
       end
 
       it "should print errored result" do
         TestJS.should_receive(:log).with('E'.yellow)
-        @runtime.evaluate("tc = new testJS.testCase('test', function() { throw('whoops'); });")
-        @runtime.evaluate("tc.run()")
+        @errored.run
       end
     end
   end
