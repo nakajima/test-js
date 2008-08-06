@@ -24,12 +24,30 @@ describe "testJS.testSuite" do
     @ts.errored.length.should == 0
   end
   
+  describe "setup()" do
+    it "should run setup before each test" do
+      tests = 0
+      @ts.meta.setup = lambda { tests += 1 }
+      @ts.run
+      tests.should == 3
+    end
+  end
+  
+  describe "teardown()" do
+    it "should run teardown after each test" do
+      tests = 0
+      @ts.meta.teardown = lambda { tests += 1 }
+      @ts.run
+      tests.should == 3
+    end
+  end
+  
   describe "run()" do
     it "should run tests" do
       @ts.run
       [:passed, :failed, :errored].each do |status|
         @ts.send(status).length.should == 1
-      end      
+      end
     end
   end
 end

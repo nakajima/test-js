@@ -12,4 +12,6 @@ Object.extend(Function.prototype, {
   }
 });
 
+var undefined = 'undefined';
+
 var testJS = { };

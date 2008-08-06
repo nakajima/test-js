@@ -4,22 +4,30 @@ testJS.testSuite = function(tests) {
 
 Object.extend(testJS.testSuite.prototype, {
   setup: function(tests) {
+    this.meta = { };
     this.tests = new Array;
     this.passed = new Array;
     this.failed = new Array;
     this.errored = new Array;
     for (name in tests) {
-      this.tests.push(new testJS.testCase(name, tests[name]));
+      if (meta = (name.match(/(setup|teardown)/) || [])[0]) { this.meta[meta] = tests[name]; }
+      else { this.tests.push(new testJS.testCase(name, tests[name])); }
     }
   },
   
   run: function() {
     for (name in this.tests) {
       var test = this.tests[name];
+      this.runMeta('setup');
       test.run();
+      this.runMeta('teardown');
       this[test.resultBin()].push(name);
     }
     return this.report();
+  },
+  
+  runMeta: function(name) {
+    if (typeof(this.meta[name]) != undefined) { this.meta[name].call(); }
   },
   
   report: function() {
