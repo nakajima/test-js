@@ -27,7 +27,9 @@ describe "testJS.testSuite" do
   describe "setup()" do
     it "should run setup before each test" do
       tests = 0
-      @ts.meta.setup = lambda { tests += 1 }
+      setup = lambda { tests += 1 }
+      setup.should_receive(:bind).exactly(3).times.and_return(setup)
+      @ts.meta.setup = setup
       @ts.run
       tests.should == 3
     end
@@ -36,7 +38,9 @@ describe "testJS.testSuite" do
   describe "teardown()" do
     it "should run teardown after each test" do
       tests = 0
-      @ts.meta.teardown = lambda { tests += 1 }
+      teardown = lambda { tests += 1 }
+      teardown.should_receive(:bind).exactly(3).times.and_return(teardown)
+      @ts.meta.teardown = teardown
       @ts.run
       tests.should == 3
     end
