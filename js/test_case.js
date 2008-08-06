@@ -9,7 +9,7 @@ Object.extend(testJS.testCase.prototype, {
   run: function(log) {
     try { this.action.apply(this); }
     catch(e) { this.errorMessage = e.toString(); }
-    Ruby.TestJS.printResult(this);
+    Ruby.TestJS.Result.add(this);
     return this;
   },
   
