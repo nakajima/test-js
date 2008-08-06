@@ -4,6 +4,15 @@ For writing JavaScript tests that run in Ruby.
 
 Uses Johnson.
 
-Not much to see yet.
+Not much to see yet. The coolest part by far is in the spec/
+directory, where I've been writing tests for JavaScript in Ruby.
+That's actually the exact opposite of the goal of this project,
+but actually seems pretty interesting anyway.
+
+TODO
+
+* Add actual Ruby runner to run JS tests
+* Setup/Teardown methods for tests
+* Scrap the xUnit thing and go with a more spec-y approach?
 
 Copyright © 2008 Pat Nakajima
