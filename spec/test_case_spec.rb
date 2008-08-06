@@ -2,6 +2,8 @@ require File.join(File.dirname(__FILE__), 'spec_helper')
 
 describe "testJS.testCase" do
   before(:each) do
+    $stdout.stub!(:print)
+    $stdout.stub!(:flush)
     @runtime = setup_runtime
     @tc = @runtime.evaluate("new testJS.testCase('a name', function() { });")
   end
@@ -51,26 +53,48 @@ describe "testJS.testCase" do
   end
   
   describe "run()" do
+    before(:each) do
+      @passed = @runtime.evaluate("new testJS.testCase('test', function() { this.assert(true); });")
+      @failed = @runtime.evaluate("new testJS.testCase('test', function() { this.assert(false); });")
+      @errored = @runtime.evaluate("new testJS.testCase('test', function() { throw('whoops'); });")
+    end
+    
     it "should return self" do
-      tc = @runtime.evaluate("new testJS.testCase('test', function() { this.assert(true); });")
-      tc.run.should == tc
+      @tc.run.should == @tc
     end
     
     it "should pass when asserting true" do
-      tc = @runtime.evaluate("new testJS.testCase('test', function() { this.assert(true); });")
-      tc.run
-      tc.passed.should be_true
+      @passed.run
+      @passed.passed.should be_true
     end
 
     it "should fail when asserting true" do
-      tc = @runtime.evaluate("new testJS.testCase('test', function() { this.assert(false); });")
-      tc.run
-      tc.passed.should be_false
+      @failed.run
+      @failed.passed.should be_false
     end
     
     it "should handle errors" do
-      tc = @runtime.evaluate("new testJS.testCase('test', function() { throw('whoops'); });")
-      lambda { tc.run }.should_not raise_error
+      lambda { @errored.run }.should_not raise_error
+    end
+    
+    describe "printing results" do
+      it "should print passing result" do
+        TestJS.should_receive(:log).with('.'.green)
+        @runtime.evaluate("tc = new testJS.testCase('test', function() { this.assert(true); });")
+        @runtime.evaluate("tc.run()")
+      end
+
+      it "should print failing result" do
+        TestJS.should_receive(:log).with('F'.red)
+        @runtime.evaluate("tc = new testJS.testCase('test', function() { this.assert(false); });")
+        @runtime.evaluate("tc.run()")
+      end
+
+      it "should print errored result" do
+        TestJS.should_receive(:log).with('E'.yellow)
+        @runtime.evaluate("tc = new testJS.testCase('test', function() { throw('whoops'); });")
+        @runtime.evaluate("tc.run()")
+      end
     end
   end
 end

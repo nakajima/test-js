@@ -6,9 +6,10 @@ testJS.testCase = function(name, action) {
 }
 
 Object.extend(testJS.testCase.prototype, {
-  run: function() {
+  run: function(log) {
     try { this.action.apply(this); }
     catch(e) { this.errorMessage = e.toString(); }
+    Ruby.TestJS.printResult(this);
     return this;
   },
   

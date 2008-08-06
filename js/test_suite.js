@@ -25,7 +25,8 @@ Object.extend(testJS.testSuite.prototype, {
   report: function() {
     var results = {
       Passed: this.passed.length,
-      Failed: this.failed.length
+      Failed: this.failed.length,
+      Errored: this.errored.length
     }
     
     return results;

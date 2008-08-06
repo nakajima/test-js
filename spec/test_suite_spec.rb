@@ -2,6 +2,8 @@ require File.join(File.dirname(__FILE__), 'spec_helper')
 
 describe "testJS.testSuite" do
   before(:each) do
+    $stdout.stub!(:print)
+    $stdout.stub!(:flush)
     @runtime = setup_runtime
     @ts = @runtime.evaluate <<-JS
       new testJS.testSuite({
