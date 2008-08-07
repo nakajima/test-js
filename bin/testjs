@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+TEST_JS_ROOT = File.join(File.dirname(__FILE__), '..')
+
+require File.join(TEST_JS_ROOT, 'lib', 'test_js')
+
+path = File.expand_path(File.join(Dir.pwd, ARGV[0]))
+
+TestJS::Runner.new(path)

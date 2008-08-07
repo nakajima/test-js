@@ -16,14 +16,13 @@ describe "testJS.testCase" do
   
   describe "statuses" do
     it "should know if passed" do
-      @tc.__passed = true
       @tc.passed.should be_true
       @tc.failed.should be_false
       @tc.errored.should be_false
     end
     
     it "should know if failed" do
-      @tc.__passed = false
+      @tc.failureReports.push :fail
       @tc.passed.should be_false
       @tc.failed.should be_true
       @tc.errored.should be_false
@@ -37,12 +36,11 @@ describe "testJS.testCase" do
     end
     
     it "should return passed result bin" do
-      @tc.__passed = true
       @tc.resultBin.should == 'passed'
     end
     
     it "should return failed result bin" do
-      @tc.__passed = false
+      @tc.failureReports.push :fail
       @tc.resultBin.should == 'failed'
     end
     
@@ -71,6 +69,7 @@ describe "testJS.testCase" do
     it "should fail when asserting true" do
       @failing.run
       @failing.passed.should be_false
+      @failing.failureReports.length.should == 1
     end
     
     it "should handle errors" do

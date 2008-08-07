@@ -8,11 +8,5 @@ require 'test_js'
 require 'spec'
 
 def setup_runtime
-  runtime = Johnson::Runtime.new
-  runtime.evaluate("Johnson.require('js/base.js');")
-  runtime.evaluate("Johnson.require('js/test_case.js');")
-  runtime.evaluate("Johnson.require('js/test_suite.js');")
-  runtime.evaluate("Johnson.require('js/assertions.js');")
-  runtime.evaluate("Ruby.require('lib/test_js')")
-  runtime
+  TestJS::Evaluator.new
 end

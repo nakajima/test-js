@@ -1,22 +1,30 @@
 = Test-JS =
 
-For writing JavaScript tests that run in Ruby.
-
-Uses Johnson.
-
-Not much to see yet. The coolest part by far is in the spec/
-directory, where I've been writing tests for JavaScript in Ruby.
-That's actually the exact opposite of the goal of this project,
-but actually seems pretty interesting anyway.
+For writing JavaScript tests that don't need any stinkin' browser.
 
 REQUIREMENTS
 
 * johnson (github.com/jbarnette/johnson)
 * colored (errtheblog.com/posts/34-a-ruby-rainbow)
 
+USAGE (still really early, probably quite buggy)
+
+Running the testjs bin and pointing it at a test file:
+
+  bin/testjs examples/person_test.js
+
+will yield results like this:
+
+  .....
+  Finished in 0.00228 seconds
+
+  5 tests
+
+If there are failures or errors, these will be reported as well.
+
 TODO
 
-* Add actual Ruby runner to run JS tests
-* Scrap the xUnit thing and go with a more spec-y approach?
+* Scrap the xUnit thing and go with a more spec-y approach
+* Run multiple files
 
 Copyright © 2008 Pat Nakajima

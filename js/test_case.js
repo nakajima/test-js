@@ -1,8 +1,8 @@
 testJS.testCase = function(name, action) {
   this.name = name;
   this.action = action;
+  this.failureReports = [];
   this.errorMessage = false;
-  this.__passed = true;
 }
 
 Object.extend(testJS.testCase.prototype, {
@@ -14,11 +14,11 @@ Object.extend(testJS.testCase.prototype, {
   },
   
   passed: function() {
-    return this.__passed && !this.errored();
+    return (this.failureReports.length == 0) && !this.errored();
   },
   
   failed: function() {
-    return !this.__passed && !this.errored();
+    return !this.passed() && !this.errored();
   },
   
   errored: function() {

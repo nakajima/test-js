@@ -23,7 +23,7 @@ describe TestJS::Result do
 
     it "should display failing result to console" do
       $stdout.should_receive(:print).with('F'.red)
-      @tc.__passed = false
+      @tc.failureReports.push :fail
       @result.display
     end
 
