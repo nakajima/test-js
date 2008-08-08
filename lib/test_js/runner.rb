@@ -2,12 +2,12 @@ module TestJS
   class Runner
     include Output
     
-    def initialize(file_path, options={})
-      @options   = options
-      @file_path = file_path
-      @test_file = File.read(file_path)
-      @evaluator = Evaluator.new
-      run! unless @options[:defer]
+    def initialize(files, options={})
+      @files = files
+      @options = options
+      @test_file = @files.map { |f| File.read(f) }.join("\n")
+      @evaluator = Evaluator.new(options[:dom])
+      run! unless options[:defer]
     end
     
     # Runs test file and reports results

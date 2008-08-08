@@ -3,13 +3,25 @@ var Person = function(name) {
 }
 
 Object.extend(Person.prototype, {
-  awesome: function() { return true; },
-  greet: function(friend) { return "Hello " + friend + '!'; },
-  changeName: function(newName) { this.name = newName; }
+  awesome: function() {
+    return true;
+  },
+  
+  greet: function(friend) {
+    return "Hello " + friend + '!';
+  },
+  
+  changeName: function(newName) {
+    this.name = newName;
+  }
 });
 
 new testJS.testSuite({
   setup: function() { this.person = new Person('Pat'); },
+  
+  'should be a Person': function() {
+    this.assertEqual(Person, this.person.constructor);
+  },
   
   'should be awesome': function() {
     this.assert(this.person.awesome());
@@ -25,12 +37,5 @@ new testJS.testSuite({
     this.assertEqual('Douglas', this.person.name);
   },
   
-  'should assert true and pass': function() {
-    this.assert(true);
-  },
-  
-  'should assert !false and pass': function() {
-    this.assert(!false)
-  }
-  
+  teardown: function() { delete(this.person); }
 }).run();

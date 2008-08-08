@@ -4,6 +4,10 @@ TEST_JS_ROOT = File.join(File.dirname(__FILE__), '..')
 
 require File.join(TEST_JS_ROOT, 'lib', 'test_js')
 
-path = File.expand_path(File.join(Dir.pwd, ARGV[0]))
+options = {
+  :dom => ARGV.delete('--dom')
+}
 
-TestJS::Runner.new(path)
+files = ARGV.map { |path| File.expand_path(File.join(Dir.pwd, path)) }
+
+TestJS::Runner.new(files, options)
