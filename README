@@ -29,9 +29,14 @@ include Johnson's DOM, as well as jQuery for convenience:
 
   testjs examples/dommy_test.js --dom
 
+== Multiple Tests ==
+
+You can run multiple tests at once:
+
+  testjs examples/person_test.js examples/dommy_test.js --dom
+
 == TODO ==
 
 * Scrap the xUnit thing and go with a more spec-y approach
-* Run multiple files
 
 Copyright © 2008 Pat Nakajima
