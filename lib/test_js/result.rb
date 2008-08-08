@@ -43,7 +43,7 @@ module TestJS
     # Prints the error or failure message if the test didn't pass
     def report
       say "#{test_number}) #{'Error'.yellow}: #{test.name}\n- #{@test.errorMessage}" if @test.errored
-      say "#{test_number}) #{'Failure'.red}: #{test.name}\n- #{@test.failureReports.join("\n")}" if @test.failed
+      say "#{test_number}) #{'Failure'.red}: #{test.name}\n#{@test.failureReports.map { |s| "   - #{s}" }.join("\n")}" if @test.failed
     end
     
   private
