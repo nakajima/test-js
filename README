@@ -2,10 +2,12 @@
 
 For writing JavaScript tests that don't need any stinkin' browser.
 
-== REQUIREMENTS ==
-
-* johnson (github.com/jbarnette/johnson)
-* colored (errtheblog.com/posts/34-a-ruby-rainbow)
+Currently, this project only supports the built-in testing framework
+I've written. I'd love to make it extensible enough to just plug into
+any of the other JS testing frameworks out there. Screw.Unit provides
+awesome hooks for extensibility, where I could just create a new Result
+object from the "passed", "failed" or "errored" events. I imagine other
+JS frameworks would be a bit more difficult, but still good to use.
 
 == USAGE (still really early, probably quite buggy) ==
 
@@ -29,11 +31,16 @@ include Johnson's DOM, as well as jQuery for convenience:
 
   testjs examples/dommy_test.js --dom
 
-== Multiple Tests ==
+=== Multiple Tests ===
 
 You can run multiple tests at once:
 
   testjs examples/person_test.js examples/dommy_test.js --dom
+
+== REQUIREMENTS ==
+
+* johnson (github.com/jbarnette/johnson)
+* colored (errtheblog.com/posts/34-a-ruby-rainbow)
 
 == TODO ==
 
