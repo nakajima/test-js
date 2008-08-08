@@ -2,16 +2,16 @@
 
 For writing JavaScript tests that don't need any stinkin' browser.
 
-REQUIREMENTS
+== REQUIREMENTS ==
 
 * johnson (github.com/jbarnette/johnson)
 * colored (errtheblog.com/posts/34-a-ruby-rainbow)
 
-USAGE (still really early, probably quite buggy)
+== USAGE (still really early, probably quite buggy) ==
 
 Running the testjs bin and pointing it at a test file:
 
-  bin/testjs examples/person_test.js
+  testjs examples/person_test.js
 
 will yield results like this:
 
@@ -22,7 +22,14 @@ will yield results like this:
 
 If there are failures or errors, these will be reported as well.
 
-TODO
+== DOM ==
+
+If you _must_ have the DOM, you can pass the "--dom" option. This will
+include Johnson's DOM, as well as jQuery for convenience:
+
+  testjs examples/dommy_test.js --dom
+
+== TODO ==
 
 * Scrap the xUnit thing and go with a more spec-y approach
 * Run multiple files
